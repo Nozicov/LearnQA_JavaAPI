@@ -1,23 +1,46 @@
-import groovyjarjarantlr4.v4.codegen.model.SrcOp;
 import io.restassured.RestAssured;
-import io.restassured.http.Cookie;
 import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HelloWorldTest {
 
+    @ParameterizedTest
+    @ValueSource(strings = {"", "NEE", "MMM"})
+    public void testHelloName(String name){
+        Map<String,String> queryParams = new HashMap<>();
+        if (name.length() > 0){
+            queryParams.put("name", name);
+        }
+        JsonPath response = RestAssured
+                .given()
+                .queryParams(queryParams)
+                .get("https://playground.learnqa.ru/api/hello")
+                .jsonPath();
+        response.prettyPrint();
+        String answer = response.getString("answer");
+        String expectedName = (name.length() > 0) ? name : "someone";
+        assertEquals("Hello, " + expectedName, answer, "The answer is not expected");
+    }
+
     @Test
+    @Disabled
     public void testPrintHello(){
         System.out.println("Hello from NEE");
     }
 
     @Test
+    @Disabled
     public void testGetHello(){
         Map<String, String> params = new HashMap<>();
         params.put("name", "NEE");
@@ -37,6 +60,7 @@ public class HelloWorldTest {
     }
 
     @Test
+    @Disabled
     public void testGetCheckType(){
         Response response = RestAssured
                 .given()
@@ -50,6 +74,7 @@ public class HelloWorldTest {
     }
 
     @Test
+    @Disabled
     public void testPostCheckType(){
         Map<String, Object> body = new HashMap<>();
         body.put("param1", "value1");
@@ -64,6 +89,7 @@ public class HelloWorldTest {
     }
 
     @Test
+    @Disabled
     public void testGetText(){
         Response response = RestAssured
                 .get("https://playground.learnqa.ru/api/get_text")
@@ -72,6 +98,7 @@ public class HelloWorldTest {
     }
 
     @Test
+    @Disabled
     public void testGet500(){
         Response response = RestAssured
                 .get("https://playground.learnqa.ru/api/get_500")
@@ -81,6 +108,7 @@ public class HelloWorldTest {
     }
 
     @Test
+    @Disabled
     public void testGet303(){
         Response response = RestAssured
                 .given()
@@ -100,6 +128,7 @@ public class HelloWorldTest {
     }
 
     @Test
+    @Disabled
     public void testAllHeaders(){
         Map<String,String> headers = new HashMap<>();
         headers.put("MyHeader1", "head1");
@@ -120,6 +149,7 @@ public class HelloWorldTest {
     }
 
     @Test
+    @Disabled
     public void testGetAuthCookie(){
         HashMap<String,String> data = new HashMap<>();
         data.put("login","secret_login");
@@ -161,5 +191,9 @@ public class HelloWorldTest {
 
         responseForCheck.print();
     }
+
+
+
+
 
 }
