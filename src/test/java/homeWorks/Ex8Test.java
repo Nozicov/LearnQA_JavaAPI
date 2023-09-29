@@ -1,6 +1,7 @@
+package homeWorks;
+
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class Ex8Test {
