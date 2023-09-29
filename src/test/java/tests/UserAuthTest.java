@@ -1,9 +1,9 @@
 package tests;
 
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import lib.Assertions;
 import lib.BaseTestCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,9 +12,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserAuthTest extends BaseTestCase {
 
@@ -37,24 +34,20 @@ public class UserAuthTest extends BaseTestCase {
         this.cookie = this.getCookie(responseGetAuth, "auth_sid");
         this.header = this.getHeader(responseGetAuth, "x-csrf-token");
         this.userIdAuth = this.getIntFromJson(responseGetAuth, "user_id");
-
     }
 
 
 
     @Test
     public void testAuthUser(){
-        JsonPath responseCheckAuth = RestAssured
+        Response responseCheckAuth = RestAssured
                 .given()
                 .cookie("auth_sid", this.cookie)
                 .header("x-csrf-token", this.header)
                 .get("https://playground.learnqa.ru/api/user/auth")
-                .jsonPath();
+                .andReturn();
 
-        int userIdCheck = responseCheckAuth.getInt("user_id");
-
-        assertTrue(userIdCheck > 0);
-        assertEquals(userIdCheck, this.userIdAuth);
+        Assertions.assertIntJsonByName(responseCheckAuth, "user_id",  this.userIdAuth);
     }
 
     @ParameterizedTest
@@ -70,7 +63,7 @@ public class UserAuthTest extends BaseTestCase {
             throw new IllegalArgumentException("Codition value is known: " + condition);
         }
 
-        JsonPath responseForCheck = spec.get().jsonPath();
-        assertEquals(0, responseForCheck.getInt("user_id"), "user_id not equals 0");
+        Response responseForCheck = spec.get().andReturn();
+        Assertions.assertIntJsonByName(responseForCheck, "user_id", 0);
     }
 }
