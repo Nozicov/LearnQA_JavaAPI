@@ -6,7 +6,6 @@ import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +56,7 @@ public class UserRegisterTest extends BaseTestCase {
                 .andReturn();
 
         Assertions.assertResponseCodeEquals(responseCreateAuth, 200);
-        Assertions.assertJsonHashKey(responseCreateAuth, "id");
+        Assertions.assertJsonHashField(responseCreateAuth, "id");
     }
 
 }
