@@ -12,21 +12,13 @@ import java.util.Map;
 
 public class UserRegisterTest extends BaseTestCase {
 
-    String email = "vinkotov@example.com";
-    String password = "123";
-    String username = "vinkotov";
-    String firstName = "vinkotov";
-    String lastName = "vinkotov";
-
-
     @Test
     public void testCreateUserWithExistingEmail(){
+        String email = "vinkotov@example.com";
+
         Map<String,String> userData = new HashMap<>();
         userData.put("email", email);
-        userData.put("password", password);
-        userData.put("username", username);
-        userData.put("firstName", firstName);
-        userData.put("lastName", lastName);
+        userData = DataGenerator.getRegistrationData(userData);
 
         Response responseCreateAuth = RestAssured
                 .given()
@@ -42,12 +34,7 @@ public class UserRegisterTest extends BaseTestCase {
     public void testCreateUserSuccessfully(){
         String randomEmail = DataGenerator.getRandomEmail();
 
-        Map<String,String> userData = new HashMap<>();
-        userData.put("email", randomEmail);
-        userData.put("password", password);
-        userData.put("username", username);
-        userData.put("firstName", firstName);
-        userData.put("lastName", lastName);
+        Map<String,String> userData = DataGenerator.getRegistrationData();
 
         Response responseCreateAuth = RestAssured
                 .given()

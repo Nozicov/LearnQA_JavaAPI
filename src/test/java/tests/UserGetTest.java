@@ -51,8 +51,8 @@ public class UserGetTest extends BaseTestCase {
                 .get("https://playground.learnqa.ru/api/user/" + userIdAuth)
                 .andReturn();
 
-        String[] expectedFielda = {"id", "username", "email", "firstName", "lastName"};
-        Assertions.assertJsonHashFields(responseUserData, expectedFielda);
+        String[] expectedField = {"id", "username", "email", "firstName", "lastName"};
+        Assertions.assertJsonHashFields(responseUserData, expectedField);
     }
 }
 
