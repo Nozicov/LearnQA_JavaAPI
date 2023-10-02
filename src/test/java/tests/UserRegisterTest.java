@@ -36,7 +36,7 @@ public class UserRegisterTest extends BaseTestCase {
         userData.put("email", email);
         userData = DataGenerator.getRegistrationData(userData);
 
-        Response responseCreateAuth = apiCoreRequests.makeCreateUser(
+        Response responseCreateAuth = apiCoreRequests.makePostRequest(
                 url,
                 userData
         );
@@ -53,7 +53,7 @@ public class UserRegisterTest extends BaseTestCase {
         userData.put("email", "vinkotovexample.com");
         userData = DataGenerator.getRegistrationData(userData);
 
-        Response responseCreateAuth = apiCoreRequests.makeCreateUser(
+        Response responseCreateAuth = apiCoreRequests.makePostRequest(
                 url,
                 userData
         );
@@ -70,7 +70,7 @@ public class UserRegisterTest extends BaseTestCase {
         userData.put("username", "v");
         userData = DataGenerator.getRegistrationData(userData);
 
-        Response responseCreateAuth = apiCoreRequests.makeCreateUser(
+        Response responseCreateAuth = apiCoreRequests.makePostRequest(
                 url,
                 userData
         );
@@ -87,7 +87,7 @@ public class UserRegisterTest extends BaseTestCase {
         userData.put("username", DataGenerator.getRandomText(251));
         userData = DataGenerator.getRegistrationData(userData);
 
-        Response responseCreateAuth = apiCoreRequests.makeCreateUser(
+        Response responseCreateAuth = apiCoreRequests.makePostRequest(
                 url,
                 userData
         );
@@ -104,7 +104,7 @@ public class UserRegisterTest extends BaseTestCase {
         userData.put(notVariable, null);
         userData = DataGenerator.getRegistrationData(userData);
 
-        Response responseCreateAuth = apiCoreRequests.makeCreateUser(
+        Response responseCreateAuth = apiCoreRequests.makePostRequest(
                 url,
                 userData
         );
@@ -120,7 +120,7 @@ public class UserRegisterTest extends BaseTestCase {
     public void testCreateUserSuccessfully(){
         Map<String,String> userData = DataGenerator.getRegistrationData();
 
-        Response responseCreateAuth = apiCoreRequests.makeCreateUser(
+        Response responseCreateAuth = apiCoreRequests.makePostRequest(
                 "https://playground.learnqa.ru/api/user/",
                 userData
         );
