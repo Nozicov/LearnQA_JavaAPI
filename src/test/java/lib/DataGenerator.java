@@ -3,6 +3,7 @@ package lib;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class DataGenerator {
 
@@ -36,6 +37,18 @@ public class DataGenerator {
             }
         }
         return userData;
+    }
+
+    public static String getRandomText(Integer max){
+            int leftLimit = 97; // letter 'a'
+            int rightLimit = 122; // letter 'z'
+            int targetStringLength = max;
+            Random random = new Random();
+
+        return random.ints(leftLimit, rightLimit + 1)
+                    .limit(targetStringLength)
+                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                    .toString();
     }
 
 }

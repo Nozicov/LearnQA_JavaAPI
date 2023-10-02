@@ -47,4 +47,13 @@ public class ApiCoreRequests {
                 .post(url)
                 .andReturn();
     }
+
+    @Step("Make a POST-request create user")
+    public Response makeCreateUser(String url, Map<String, String> regData){
+        return given()
+                .filter(new AllureRestAssured())
+                .body(regData)
+                .post(url)
+                .andReturn();
+    }
 }
