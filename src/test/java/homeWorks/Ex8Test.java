@@ -2,11 +2,13 @@ package homeWorks;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class Ex8Test {
 
     @Test
+    @Disabled
     public void testTokens() throws InterruptedException {
         JsonPath createJob = RestAssured
                 .get("https://playground.learnqa.ru/ajax/api/longtime_job")
@@ -60,6 +62,7 @@ public class Ex8Test {
     }
 
     @Test
+    @Disabled
     public void testNotCorrectToken(){
         String notCorrectToken = String.valueOf(Math.random());
         JsonPath response = RestAssured

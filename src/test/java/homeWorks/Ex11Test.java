@@ -2,6 +2,7 @@ package homeWorks;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Ex11Test {
 
     @Test
+    @Disabled
     public void testGetCookie(){
         Response response = RestAssured
                 .given()

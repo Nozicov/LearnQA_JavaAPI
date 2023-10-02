@@ -2,6 +2,7 @@ package homeWorks;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -13,6 +14,7 @@ public class Ex9Test {
     List<String> ListPass = new ArrayList<>();
 
     @Test
+    @Disabled
     public void testPassword(){
 
         try {

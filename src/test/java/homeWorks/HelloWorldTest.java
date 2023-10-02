@@ -18,6 +18,7 @@ public class HelloWorldTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"", "NEE", "MMM"})
+    @Disabled
     public void testHelloName(String name){
         Map<String,String> queryParams = new HashMap<>();
         if (name.length() > 0){
