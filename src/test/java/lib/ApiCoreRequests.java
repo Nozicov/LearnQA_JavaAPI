@@ -12,11 +12,18 @@ import static io.restassured.RestAssured.given;
 public class ApiCoreRequests {
 
     @Step("Make a GET-request with cookie and token")
-    public Response makeGetRequest(String url, String token, String cookie){
+    public Response makeGetRequestAuth(String url, String token, String cookie){
         return given()
                 .filter(new AllureRestAssured())
                 .header(new Header("x-csrf-token", token))
                 .cookie("auth_sid", cookie)
+                .get(url)
+                .andReturn();
+    }
+    @Step("Make a GET-request not auth")
+    public Response makeGetRequestNotAuth(String url){
+        return given()
+                .filter(new AllureRestAssured())
                 .get(url)
                 .andReturn();
     }

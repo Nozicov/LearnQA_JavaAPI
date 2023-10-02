@@ -3,9 +3,7 @@ package tests;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import lib.ApiCoreRequests;
 import lib.Assertions;
 import lib.BaseTestCase;
@@ -48,7 +46,7 @@ public class UserAuthTest extends BaseTestCase {
     @DisplayName("Позитивный тест авторизации пользователя")
     public void testAuthUser(){
         Response responseCheckAuth = apiCoreRequests
-                .makeGetRequest("https://playground.learnqa.ru/api/user/auth", this.header, this.cookie);
+                .makeGetRequestAuth("https://playground.learnqa.ru/api/user/auth", this.header, this.cookie);
         Assertions.assertIntJsonByName(responseCheckAuth, "user_id",  this.userIdAuth);
     }
 
