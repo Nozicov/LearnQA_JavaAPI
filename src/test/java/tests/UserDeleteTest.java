@@ -16,8 +16,8 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-@Epic("Кейсы по авторизации")
-@Feature("Авторизация пользователя")
+@Epic("Кейсы по удалению")
+@Feature("Удаление пользователя")
 public class UserDeleteTest extends BaseTestCase {
     String cookie;
     String header;
