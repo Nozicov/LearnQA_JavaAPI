@@ -20,6 +20,7 @@ public class ApiCoreRequests {
                 .get(url)
                 .andReturn();
     }
+
     @Step("Make a GET-request not auth")
     public Response makeGetRequestNotAuth(String url){
         return given()
@@ -47,11 +48,31 @@ public class ApiCoreRequests {
     }
 
     @Step("Make a POST-request")
-    public Response makePostRequest(String url, Map<String,String> authData){
+    public Response makePostRequest(String url, Map<String,String> Data){
         return given()
                 .filter(new AllureRestAssured())
-                .body(authData)
+                .body(Data)
                 .post(url)
+                .andReturn();
+    }
+
+    @Step("Make a PUT-request")
+    public Response makePutRequestAuth(String url, Map<String,String> Data, String token, String cookie){
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new Header("x-csrf-token", token))
+                .cookie("auth_sid", cookie)
+                .body(Data)
+                .put(url)
+                .andReturn();
+    }
+
+    @Step("Make a PUT-request")
+    public Response makePutRequestNotAuth(String url, Map<String,String> Data){
+        return given()
+                .filter(new AllureRestAssured())
+                .body(Data)
+                .put(url)
                 .andReturn();
     }
 
