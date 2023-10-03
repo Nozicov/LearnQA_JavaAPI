@@ -24,6 +24,21 @@ public class UserRegisterTest extends BaseTestCase {
     String url = "https://playground.learnqa.ru/api/user/";
 
     @Test
+    @Description("Позитивный тест регистрации пользователя")
+    @DisplayName("Успешная регистрация пользователя")
+    public void testCreateUserSuccessfully(){
+        Map<String,String> userData = DataGenerator.getRegistrationData();
+
+        Response responseCreateAuth = apiCoreRequests.makePostRequest(
+                "https://playground.learnqa.ru/api/user/",
+                userData
+        );
+
+        Assertions.assertResponseCodeEquals(responseCreateAuth, 200);
+        Assertions.assertJsonHashField(responseCreateAuth, "id");
+    }
+
+    @Test
     @Description("Негативный тест регистрации пользователя с существующим email")
     @DisplayName("Email already exists")
     public void testCreateUserWithExistingEmail(){
@@ -108,22 +123,6 @@ public class UserRegisterTest extends BaseTestCase {
 
         Assertions.assertResponseTextEquals(responseCreateAuth, "The following required params are missed: " + notVariable);
         Assertions.assertResponseCodeEquals(responseCreateAuth, 400);
-    }
-
-
-    @Test
-    @Description("Позитивный тест регистрации пользователя")
-    @DisplayName("Успешная регистрация пользователя")
-    public void testCreateUserSuccessfully(){
-        Map<String,String> userData = DataGenerator.getRegistrationData();
-
-        Response responseCreateAuth = apiCoreRequests.makePostRequest(
-                "https://playground.learnqa.ru/api/user/",
-                userData
-        );
-
-        Assertions.assertResponseCodeEquals(responseCreateAuth, 200);
-        Assertions.assertJsonHashField(responseCreateAuth, "id");
     }
 
 }
